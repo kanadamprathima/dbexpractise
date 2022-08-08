@@ -1,40 +1,34 @@
 "use strict";
-
-//const todoList = require("../models/todoList");
-
 module.exports = {
   async up(queryInterface, Sequelize) {
-    await queryInterface.createTable("todoItems", {
+    await queryInterface.createTable("itemTags", {
       id: {
         allowNull: false,
         autoIncrement: true,
         primaryKey: true,
         type: Sequelize.INTEGER,
       },
-
-      task: {
-        type: Sequelize.STRING,
-      },
-
-      todoListId: {
+      todoItemId: {
         type: Sequelize.INTEGER,
         references: {
-          model: "todoLists",
+          model: "todoItems",
           key: "id",
         },
         onUpdate: "CASCADE",
         onDelete: "SET NULL",
       },
-
-      deadLine: {
-        type: Sequelize.STRING,
+      tagId: {
+        type: Sequelize.INTEGER,
+        references: {
+          model: "tags",
+          key: "id",
+        },
+        onUpdate: "CASCADE",
+        onDelete: "SET NULL",
       },
       createdAt: {
         allowNull: false,
         type: Sequelize.DATE,
-      },
-      important: {
-        type: Sequelize.BOOLEAN,
       },
       updatedAt: {
         allowNull: false,
@@ -43,6 +37,6 @@ module.exports = {
     });
   },
   async down(queryInterface, Sequelize) {
-    await queryInterface.dropTable("todoItems");
+    await queryInterface.dropTable("itemTags");
   },
 };

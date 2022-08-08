@@ -50,7 +50,10 @@ const createUser = async (name, email, phone) => {
 //Deleteuser
 const deleteUser = async (id) => {
   try {
-    await User.destroy(id);
+    const usertToDelete = await User.findByPk(id);
+    console.log(usertToDelete);
+    usertToDelete.destroy();
+    console.log(terminated);
   } catch (e) {
     console.log(e.message);
   }
@@ -58,3 +61,5 @@ const deleteUser = async (id) => {
 deleteUser(16);
 
 //Searches only for important TodoItems
+
+
